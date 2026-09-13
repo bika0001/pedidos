@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BIKA · Vérification des fichiers</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/icon-64.png" type="image/png">
+  <link rel="stylesheet" href="css/app.css">
+  <style>
+    body { padding: 0 0 40px; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 16px; }
+    h1 { font-size: 26px; margin-bottom: 4px; }
+    h2 { font-size: 20px; margin: 22px 0 8px; }
+    .ok { background: var(--ok-soft); color: var(--ok); }
+    .bad { background: var(--danger-soft); color: var(--danger); }
+    .warn { background: var(--warn-soft); color: var(--warn); }
+    .box { border-radius: var(--r-md); padding: 12px 14px; font-weight: 700; margin-top: 8px; }
+    .box ul { padding-left: 18px; list-style: disc; font-weight: 600; margin-top: 6px; }
+    .box li + li { margin-top: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--surface); border-radius: var(--r-md); overflow: hidden; }
+    th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: var(--peri-soft); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .tbl { overflow-x: auto; margin-top: 8px; }
+    code { background: var(--surface-2); padding: 1px 5px; border-radius: 5px; font-size: 13px; }
+    .muted { color: var(--ink-2); }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .kv { display: grid; grid-template-columns: 180px 1fr; gap: 4px 12px; font-size: 14px; font-weight: 600; }
+    .kv b { font-weight: 800; }
+    pre.err { background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: var(--r-sm); padding: 10px; overflow: auto; font-size: 12.5px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Vérification BIKA</h1>
+    <p class="muted">Cette page lit <code>data/config.json</code> et <code>data/menu.json</code> et te dit si tout est bon avant que les clients le voient. Recharge-la après chaque modification.</p>
+    <div id="out"><div class="loading"><div class="spinner"></div>Lecture des fichiers…</div></div>
+  </div>
+  <script>
+  (async function () {
+    const out = document.getElementById('out');
+    const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+    const DAY_FR = { mon: 'lundi', tue: 'mardi', wed: 'mercredi', thu: 'jeudi', fri: 'vendredi', sat: 'samedi', sun: 'dimanche' };
+    const errors = [], warnings = [], infos = [];
+    const money = new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR' });
+
+    async function loadText(url) { const r = await fetch(url + '?v=' + Date.now(), { cache: 'no-store' }); if (!r.ok) throw new Error(url + ' → HTTP ' + r.status); return r.text(); }
+    function parseWithPos(txt, name) {
+      try { return JSON.parse(txt); } catch (e) {
+        const m = /position (\d+)/.exec(e.message);
+        let where = '';
+        if (m) { const pos = Number(m[1]); const before = txt.slice(0, pos); const line = before.split('\n').length; const col = pos - before.lastIndexOf('\n'); const lines = txt.split('\n'); where = ' — ligne ' + line + ', colonne ' + col + '\n' + lines.slice(Math.max(0, line - 2), line + 1).map((l, i) => (Math.max(0, line - 2) + i + 1) + '  ' + l).join('\n'); }
+        errors.push(name + ' : JSON invalide (' + e.message + ')' + where + '\nAstuce : virgule en trop ou manquante, guillemet oublié. Colle le fichier sur jsonlint.com pour voir la ligne.');
+        return null;
+      }
+    }
+    const toMin = (s) => { const m = /^(\d{1,2}):(\d{2})$/.exec(String(s || '').trim()); return m ? +m[1] * 60 + +m[2] : null; };
+    const fmt = (min) => String(Math.floor(min / 60)).padStart(2, '0') + ':' + String(min % 60).padStart(2, '0');
+
+    let cfgTxt, menuTxt;
+    try { [cfgTxt, menuTxt] = await Promise.all([loadText('data/config.json'), loadText('data/menu.json')]); }
+    catch (e) { out.innerHTML = '<div class="box bad">Impossible de lire les fichiers : ' + esc(e.message) + '</div>'; return; }
+    const cfg = parseWithPos(cfgTxt, 'config.json');
+    const menu = parseWithPos(menuTxt, 'menu.json');
+
+    /* ---------- config ---------- */
+    let digits = '';
+    if (cfg) {
+      const b = cfg.business || {};
+      const raw = String(b.whatsapp_number || '');
+      digits = /x/i.test(raw) ? '' : raw.replace(/\D/g, '').replace(/^00/, '');
+      if (!digits || digits.length < 9 || digits.length > 15 || /^0+$/.test(digits)) { warnings.push('Numéro WhatsApp absent ou invalide (« ' + raw + ' ») → le site est en MODE VITRINE : carte visible, commande désactivée. Mets le numéro au format +351XXXXXXXXX dans business.whatsapp_number.'); digits = ''; }
+      else infos.push('Numéro WhatsApp détecté : +' + digits + ' (lien wa.me/' + digits + ')');
+      if (!b.maps_url) warnings.push('business.maps_url vide : le bouton « Como chegar » n’apparaîtra pas.');
+      if (!b.address) warnings.push('business.address vide.');
+      const hours = cfg.hours || {};
+      DAYS.forEach((d) => {
+        const v = hours[d];
+        if (v === undefined) { warnings.push('hours.' + d + ' absent → ' + DAY_FR[d] + ' fermé.'); return; }
+        if (!Array.isArray(v)) { errors.push('hours.' + d + ' doit être une liste, ex. [["08:00","18:00"]] ou [] pour fermé.'); return; }
+        v.forEach((iv) => {
+          const o = Array.isArray(iv) ? toMin(iv[0]) : null, c = Array.isArray(iv) ? toMin(iv[1]) : null;
+          if (o == null || c == null) errors.push('hours.' + d + ' : période mal écrite ' + JSON.stringify(iv) + ' (format ["08:00","18:00"]).');
+          else if (c <= o) errors.push('hours.' + d + ' : fermeture (' + iv[1] + ') avant ouverture (' + iv[0] + '). Le passage de minuit n’est pas supporté ; cette période sera ignorée.');
+        });
+      });
+      (Array.isArray(cfg.closures) ? cfg.closures : []).forEach((c) => {
+        const d = typeof c === 'string' ? c : (c && (c.from || c.date));
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(String(d || ''))) errors.push('closures : date mal écrite ' + JSON.stringify(c) + ' (format "2026-12-25" ou {"from":"…","to":"…","reason":{…}}).');
+      });
+      const o = cfg.ordering || {};
+      ['prep_minutes', 'slot_step_minutes', 'last_order_minutes_before_close', 'first_slot_minutes_after_open', 'preorder_before_open_minutes', 'max_qty_per_item', 'max_items_per_order', 'max_lines', 'note_max_chars', 'reply_expectation_minutes'].forEach((k) => { if (o[k] !== undefined && (typeof o[k] !== 'number' || o[k] < 0)) errors.push('ordering.' + k + ' doit être un nombre (sans guillemets).'); });
+      (Array.isArray(o.rush) ? o.rush : []).forEach((r, i) => { if (toMin(r.from) == null || toMin(r.to) == null) errors.push('ordering.rush[' + i + '] : from/to au format "09:00".'); (r.days || []).forEach((d) => { if (!DAYS.includes(d)) errors.push('ordering.rush[' + i + '] : jour inconnu "' + d + '" (mon, tue, wed, thu, fri, sat, sun).'); }); });
+      if (o.paused === true) warnings.push('ordering.paused = true : les commandes en ligne sont coupées (carte visible).');
+      if (o.sold_out_today && o.sold_out_today.date) {
+        const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Lisbon', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+        if (o.sold_out_today.date !== today) warnings.push('sold_out_today.date = ' + o.sold_out_today.date + ' n’est pas aujourd’hui (' + today + ') → ignoré. C’est normal si c’est une vieille valeur.');
+        else infos.push('Épuisés aujourd’hui : ' + ((o.sold_out_today.item_ids || []).join(', ') || '(aucun)'));
+      }
+      if (cfg.debug === true) warnings.push('debug = true : à remettre à false avant de publier.');
+    }
+
+    /* ---------- menu ---------- */
+    const rows = [];
+    if (menu) {
+      if (!Array.isArray(menu.categories)) errors.push('menu.json : "categories" doit être une liste.');
+      const ids = new Set();
+      const mods = menu.modifiers || {};
+      const all = menu.allergens || {};
+      const TAGS = ['new', 'veggie', 'vege', 'vegan', 'popular', 'hot', 'cold', 'alcohol', 'dog', 'ask_staff'];
+      Object.keys(mods).forEach((m) => {
+        if (typeof mods[m].price !== 'number') errors.push('Modificateur "' + m + '" : price doit être un nombre sans guillemets.');
+        (mods[m].allergens || []).forEach((a) => { if (!all[String(a)]) warnings.push('Modificateur "' + m + '" : allergène "' + a + '" inconnu (voir la liste "allergens").'); });
+      });
+      (menu.categories || []).forEach((c, ci) => {
+        if (!c.id) errors.push('Catégorie n°' + (ci + 1) + ' sans "id".');
+        if (!c.name || !c.name.pt) errors.push('Catégorie "' + (c.id || ci) + '" sans name.pt.');
+        if (c.station && !['kitchen', 'bar'].includes(c.station)) warnings.push('Catégorie "' + c.id + '" : station doit être "kitchen" ou "bar".');
+        if (!c.station) warnings.push('Catégorie "' + c.id + '" sans station : l’app devine cuisine ou bar d’après le nom. Ajoute "station": "kitchen" ou "bar".');
+        (c.tags || []).forEach((tg) => { if (!TAGS.includes(tg)) warnings.push('Catégorie "' + c.id + '" : tag "' + tg + '" inconnu (ignoré).'); });
+        (c.items || []).forEach((it, ii) => {
+          const ref = 'Article "' + (it.id || (c.id + '#' + (ii + 1))) + '"';
+          if (!it.id) errors.push(ref + ' sans "id".');
+          else if (ids.has(it.id)) errors.push(ref + ' : id en double (il sera ignoré).'); else ids.add(it.id);
+          if (!it.name || !it.name.pt) errors.push(ref + ' sans name.pt (le nom que lit le barista).');
+          if (typeof it.price !== 'number') errors.push(ref + ' : price doit être un nombre sans guillemets, ex. 6.9 (pas "6,90").');
+          else if (it.price < 0 || Math.abs(Math.round(it.price * 100) - it.price * 100) > 0.001) warnings.push(ref + ' : prix ' + it.price + ' invalide (deux décimales au maximum, avec un point).');
+          (it.allergens || []).forEach((a) => { if (!all[String(a)]) warnings.push(ref + ' : allergène "' + a + '" inconnu (voir la liste "allergens").'); });
+          (it.modifiers || []).forEach((m) => { if (!mods[m]) errors.push(ref + ' : modificateur "' + m + '" inconnu (voir "modifiers").'); });
+          if (it.choice) { if (!Array.isArray(it.choice.options) || !it.choice.options.length) errors.push(ref + ' : choice.options vide.'); else it.choice.options.forEach((o) => { if (!o.id || !o.name || !o.name.pt) errors.push(ref + ' : option de choix sans id ou name.pt.'); }); }
+          (it.tags || []).forEach((tg) => { if (!TAGS.includes(tg)) warnings.push(ref + ' : tag "' + tg + '" inconnu (ignoré).'); });
+          rows.push({ cat: c.name && c.name.pt, station: c.station || '', it });
+        });
+        // La phrase sous la catégorie annonce le prix des options : elle doit suivre la section "modifiers".
+        const tl = c.tagline && c.tagline.pt;
+        if (tl) {
+          const used = new Set();
+          (c.items || []).forEach((it) => (it.modifiers || []).forEach((m) => { if (mods[m] && typeof mods[m].price === 'number') used.add(Math.round(mods[m].price * 100)); }));
+          (tl.match(/\+\s?[0-9]+,[0-9]{2}/g) || []).forEach((s) => {
+            const v = Math.round(Number(s.replace(/[^0-9,]/g, '').replace(',', '.')) * 100);
+            if (!used.has(v)) warnings.push('Catégorie "' + c.id + '" : sa phrase annonce ' + s.trim() + ' € mais aucune option de ses articles ne coûte ce prix. Mets la phrase (tagline) à jour.');
+          });
+        }
+      });
+      (((cfg && cfg.ordering && cfg.ordering.sold_out_today) || {}).item_ids || []).forEach((id) => { if (!ids.has(id)) warnings.push('sold_out_today : "' + id + '" n’existe pas dans menu.json (sans effet).'); });
+      infos.push(rows.length + ' articles dans ' + (menu.categories || []).length + ' catégories · ' + rows.filter((r) => r.it.available === false).length + ' épuisé(s) · ' + rows.filter((r) => r.it.hidden === true).length + ' caché(s)');
+    }
+
+    /* ---------- codes de réduction ---------- */
+    const promoRows = [];
+    if (cfg && cfg.discounts && Array.isArray(cfg.discounts.codes)) {
+      const todayP = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Lisbon', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+      const seenP = new Set();
+      cfg.discounts.codes.forEach((p, n) => {
+        const code = String((p && p.code) || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+        if (code.length < 3) { errors.push('Code de réduction n°' + (n + 1) + ' : "code" manquant ou trop court, 3 lettres ou chiffres minimum.'); return; }
+        if (seenP.has(code)) errors.push('Code ' + code + ' en double.');
+        seenP.add(code);
+        if (!['percent', 'amount'].includes(p.type)) errors.push('Code ' + code + ' : type doit être "percent" ou "amount".');
+        if (typeof p.value !== 'number' || p.value <= 0) errors.push('Code ' + code + ' : value doit être un nombre positif, sans guillemets.');
+        if (p.type === 'percent' && p.value > 100) errors.push('Code ' + code + ' : un pourcentage ne peut pas dépasser 100.');
+        ['valid_from', 'valid_until'].forEach((k) => { if (p[k] && !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(p[k])) errors.push('Code ' + code + ' : ' + k + ' au format "2026-12-31".'); });
+        if (p.service && !['all', 'takeaway', 'salon'].includes(p.service)) errors.push('Code ' + code + ' : service doit être "all", "takeaway" ou "salon".');
+        if (p.min_order !== undefined && (typeof p.min_order !== 'number' || p.min_order < 0)) errors.push('Code ' + code + ' : min_order doit être un nombre.');
+        let etat = 'actif';
+        if (p.active === false) etat = 'coupé';
+        else if (p.valid_until && todayP > p.valid_until) { etat = 'expiré'; warnings.push('Code ' + code + ' expiré depuis le ' + p.valid_until + '.'); }
+        else if (p.valid_from && todayP < p.valid_from) etat = 'pas encore actif';
+        if (code === 'TESTE10' && etat === 'actif') warnings.push('Le code de test TESTE10 est actif : supprime-le avant d’ouvrir au public.');
+        promoRows.push({ code, p, etat });
+      });
+      infos.push(promoRows.filter((x) => x.etat === 'actif').length + ' code(s) de réduction actif(s) sur ' + promoRows.length);
+    }
+
+    /* ---------- now / status (même logique que l’app, version courte) ---------- */
+    let statusHTML = '';
+    if (cfg) {
+      const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(new URLSearchParams(location.search).get('now') || '');
+      let now;
+      if (m) { const dt = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])); now = { date: m[1] + '-' + m[2] + '-' + m[3], dow: dt.getUTCDay(), minutes: +m[4] * 60 + +m[5], test: true }; }
+      else { const p = {}; new Intl.DateTimeFormat('en-GB', { timeZone: cfg.timezone || 'Europe/Lisbon', hourCycle: 'h23', weekday: 'short', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date()).forEach((x) => { p[x.type] = x.value; }); now = { date: p.year + '-' + p.month + '-' + p.day, dow: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday), minutes: (+p.hour % 24) * 60 + +p.minute }; }
+      const key = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'][now.dow];
+      const closed = (cfg.closures || []).some((c) => typeof c === 'string' ? c === now.date : (c && (c.from || c.date) <= now.date && (c.to || c.from || c.date) >= now.date));
+      const iv = closed ? [] : ((cfg.hours || {})[key] || []).map((x) => ({ open: toMin(x[0]), close: toMin(x[1]) })).filter((x) => x.open != null && x.close != null && x.close > x.open);
+      const cur = iv.find((x) => now.minutes >= x.open && now.minutes < x.close);
+      const o = cfg.ordering || {};
+      const prep = o.prep_minutes || 15, step = o.slot_step_minutes || 15, lastB = o.last_order_minutes_before_close != null ? o.last_order_minutes_before_close : 15;
+      let slots = [], asap = null;
+      if (cur) { asap = Math.ceil((now.minutes + prep) / 5) * 5; const last = cur.close - lastB; if (asap <= last) { for (let v = Math.ceil((asap + 1) / step) * step; v <= last; v += step) slots.push(fmt(v)); if (last > asap && slots[slots.length - 1] !== fmt(last)) slots.push(fmt(last)); } else asap = null; }
+      statusHTML = '<div class="kv">' +
+        '<b>Heure de Lisbonne</b><span>' + esc(now.date + ' ' + fmt(now.minutes)) + (now.test ? ' <b>(MODE TEST via ?now=)</b>' : '') + '</span>' +
+        '<b>Aujourd’hui</b><span>' + DAY_FR[key] + (closed ? ' · fermeture exceptionnelle' : '') + ' · ' + (iv.length ? iv.map((x) => fmt(x.open) + '–' + fmt(x.close)).join(', ') : 'fermé') + '</span>' +
+        '<b>État</b><span>' + (cur ? 'OUVERT jusqu’à ' + fmt(cur.close) : 'FERMÉ') + '</span>' +
+        '<b>« Le plus tôt possible »</b><span>' + (asap ? '≈ ' + fmt(asap) + ' (délai ' + prep + ' min, hors rush)' : (cur ? 'plus de créneau aujourd’hui (dernière commande ' + fmt(cur.close - lastB) + ')' : '—')) + '</span>' +
+        '<b>Créneaux proposés</b><span>' + (slots.length ? slots.join(' · ') : '—') + '</span>' +
+        '</div><p class="muted small mt-8">Pour simuler une autre heure : ajoute <code>?now=2026-09-12T09:07</code> à l’adresse de cette page (ou de l’app).</p>';
+    }
+
+    /* ---------- render ---------- */
+    let html = '';
+    if (errors.length) html += '<div class="box bad">✗ ' + errors.length + ' erreur(s) à corriger<ul>' + errors.map((e) => '<li><pre class="err">' + esc(e) + '</pre></li>').join('') + '</ul></div>';
+    else html += '<div class="box ok">✓ Les deux fichiers sont valides.</div>';
+    if (warnings.length) html += '<div class="box warn">⚠ ' + warnings.length + ' avertissement(s)<ul>' + warnings.map((w) => '<li>' + esc(w) + '</li>').join('') + '</ul></div>';
+    if (infos.length) html += '<div class="box" style="background:var(--peri-soft)"><ul style="margin:0">' + infos.map((i) => '<li>' + esc(i) + '</li>').join('') + '</ul></div>';
+    html += '<div class="row"><a class="btn navy" href="./">Ouvrir l’app</a>' + (digits ? '<a class="btn primary" target="_blank" rel="noopener" href="https://wa.me/' + digits + '?text=' + encodeURIComponent('*BIKA TESTE · check.html*\nSe recebeste isto, o número está bem configurado.') + '">Envoyer un message test</a>' : '') + '</div>';
+    if (statusHTML) html += '<h2>Maintenant</h2><div class="card">' + statusHTML + '</div>';
+    if (promoRows.length) {
+      html += '<h2>Codes de réduction</h2><div class="tbl"><table><thead><tr><th>Code</th><th>Réduction</th><th>Minimum</th><th>Service</th><th>Validité</th><th>État</th></tr></thead><tbody>' +
+        promoRows.map((x) => '<tr' + (x.etat !== 'actif' ? ' style="opacity:.55"' : '') + '><td><code>' + esc(x.code) + '</code></td><td class="num">' + (x.p.type === 'percent' ? esc(x.p.value) + ' %' : esc(money.format(x.p.value || 0))) + '</td><td class="num">' + (x.p.min_order ? esc(money.format(x.p.min_order)) : '—') + '</td><td>' + esc(x.p.service || 'all') + '</td><td>' + esc((x.p.valid_from || 'toujours') + ' → ' + (x.p.valid_until || 'sans fin')) + '</td><td>' + esc(x.etat) + '</td></tr>').join('') +
+        '</tbody></table></div>';
+    }
+    if (rows.length) {
+      html += '<h2>La carte telle que l’app la lit</h2><div class="tbl"><table><thead><tr><th>Catégorie</th><th>id</th><th>PT</th><th>EN</th><th>FR</th><th>Prix</th><th>Allerg.</th><th>Options</th><th>État</th></tr></thead><tbody>' +
+        rows.map((r) => '<tr' + (r.it.available === false || r.it.hidden ? ' style="opacity:.5"' : '') + '><td>' + esc(r.cat) + (r.station ? ' <span class="muted">(' + esc(r.station) + ')</span>' : '') + '</td><td><code>' + esc(r.it.id) + '</code></td><td>' + esc(r.it.name && r.it.name.pt) + '</td><td>' + esc(r.it.name && r.it.name.en) + '</td><td>' + esc(r.it.name && r.it.name.fr) + '</td><td class="num">' + (typeof r.it.price === 'number' ? esc(money.format(r.it.price)) : '<b style="color:var(--danger)">?</b>') + '</td><td>' + esc((r.it.allergens || []).join('·')) + '</td><td>' + esc([(r.it.modifiers || []).join(', '), r.it.choice && Array.isArray(r.it.choice.options) ? 'choix: ' + r.it.choice.options.map((o) => o.name && o.name.pt).join('/') : ''].filter(Boolean).join(' · ')) + '</td><td>' + (r.it.hidden ? 'caché' : r.it.available === false ? 'épuisé' : 'ok') + '</td></tr>').join('') +
+        '</tbody></table></div>';
+    }
+    out.innerHTML = html;
+  })();
+  </script>
+</body>
+</html>

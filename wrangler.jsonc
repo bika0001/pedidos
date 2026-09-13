@@ -1,0 +1,13 @@
+// Cloudflare Workers : configuration du site de commande BIKA (pedidos.bika.pt).
+// Rien à modifier ici. Le nom doit rester identique au nom du Worker dans Cloudflare.
+{
+  "name": "bika-pedidos",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    // Le site, ce sont les fichiers du dépôt lui-même (index.html, salao.html, data/…).
+    "directory": ".",
+    // /salao.html devient /salao, comme sur Pages.
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>BIKA · Pedir para levantar</title>
+  <meta name="description" content="A tua gulodice pelo telemóvel. Encomenda para levar no BIKA, Olhão: escolhe, envia por WhatsApp, levanta no balcão.">
+  <meta name="theme-color" content="#EDE6DA">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="BIKA">
+  <meta property="og:title" content="BIKA · Pedir para levantar">
+  <meta property="og:description" content="A tua gulodice pelo telemóvel. Encomenda aqui, levanta no balcão.">
+  <meta property="og:image" content="assets/icon-512.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon-64.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="app" id="app">
+
+    <header class="topbar">
+      <a class="logo-link" href="#" id="logo-link" aria-label="BIKA">
+        <img class="logo" src="assets/logo-navy.png" alt="BIKA" width="640" height="217">
+      </a>
+      <div class="topbar-right">
+        <div class="lang-switch" id="lang-switch" role="group" aria-label="Idioma">
+          <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="view-menu">
+      <section class="hero">
+        <div class="hero-inner">
+          <span class="status-chip" id="status" aria-live="polite">…</span>
+          <h1 id="hero-title">A tua gulodice pelo telemóvel.</h1>
+          <p id="hero-sub"></p>
+          <div class="hero-meta">
+            <a class="pill" id="hero-maps" href="#" target="_blank" rel="noopener"></a>
+            <span class="pill" id="hero-prep"></span>
+          </div>
+          <img class="mascot" src="assets/mascot-orange.png" alt="" width="480" height="534" aria-hidden="true">
+        </div>
+      </section>
+
+      <div id="notices"></div>
+      <div id="reorder"></div>
+
+      <nav class="catnav" id="catnav" aria-label="Categorias"><ul></ul></nav>
+
+      <div class="menu" id="menu">
+        <div class="loading"><div class="spinner"></div><span id="loading-text">…</span></div>
+      </div>
+
+      <footer class="footer" id="footer"></footer>
+    </main>
+
+    <main id="view-confirm" class="hidden"></main>
+  </div>
+
+  <div class="cartbar" id="cartbar" aria-hidden="true">
+    <div class="cartbar-inner">
+      <div class="cartbar-summary" aria-live="polite">
+        <span class="count" id="cart-count"></span>
+        <span class="total" id="cart-total"></span>
+      </div>
+      <button type="button" class="btn primary" id="cart-open"></button>
+    </div>
+  </div>
+
+  <div class="sheet-backdrop" id="backdrop"></div>
+
+  <section class="sheet" id="sheet-item" role="dialog" aria-modal="true" aria-labelledby="item-title" aria-hidden="true">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <h2 id="item-title"></h2>
+      <button type="button" class="btn-close" data-close aria-label="Fechar"></button>
+    </div>
+    <div class="sheet-body" id="item-body"></div>
+    <div class="sheet-foot" id="item-foot"></div>
+  </section>
+
+  <section class="sheet" id="sheet-order" role="dialog" aria-modal="true" aria-labelledby="order-title" aria-hidden="true">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <h2 id="order-title"></h2>
+      <button type="button" class="btn-close" data-close aria-label="Fechar"></button>
+    </div>
+    <div class="sheet-body" id="order-body"></div>
+    <div class="sheet-foot" id="order-foot"></div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

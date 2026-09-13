@@ -1,0 +1,12 @@
+{
+  "name": "bika-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BIKA — encomendas para levar e serviço ao salão. Site estático, sem dependências.",
+  "scripts": {
+    "check": "node -e \"['data/menu.json','data/config.json','data/config.salao.json'].forEach(f=>{JSON.parse(require('fs').readFileSync(f,'utf8'));console.log(f,'OK')})\""
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

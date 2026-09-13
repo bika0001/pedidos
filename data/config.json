@@ -1,0 +1,72 @@
+{
+  "_comment": "Réglages BIKA. Modifie seulement les valeurs à droite des deux points. N'enlève ni virgule ni guillemet. Vérifie avec check.html avant de publier.",
+
+  "business": {
+    "name": "BIKA",
+    "whatsapp_number": "+351918880291",
+    "phone_display": "+351 918 880 291",
+    "email": "",
+    "address": "Rua José dos Reis Silva, Olhão",
+    "maps_url": "https://maps.google.com/?q=BIKA%2C+Rua+Jos%C3%A9+dos+Reis+Silva%2C+Olh%C3%A3o",
+    "instagram": "bika.olhao",
+    "website": "bika.pt"
+  },
+
+  "hours": {
+    "_comment": "Horaires d'ouverture = heures de retrait. On peut commander 24h/24, mais seulement pour un créneau pendant ces horaires. Un jour fermé s'écrit [].",
+    "mon": [["08:00", "15:00"]],
+    "tue": [["08:00", "15:00"]],
+    "wed": [["08:00", "15:00"]],
+    "thu": [["08:00", "15:00"]],
+    "fri": [["08:00", "15:00"]],
+    "sat": [["08:00", "15:00"]],
+    "sun": []
+  },
+
+  "special_hours": {
+    "_comment": "Horaire différent un jour précis. Exemple : \"2026-12-24\": [[\"08:00\", \"13:00\"]]"
+  },
+
+  "closures": [],
+
+  "ordering": {
+    "_comment": "Durées en minutes. last_order_minutes_before_close=10 : dernier créneau 10 min avant la fermeture (14:50). preorder_before_open_minutes=1440 et allow_preorder_next_day=true : on peut commander à toute heure pour un créneau du prochain jour d'ouverture. paused=true coupe les commandes en ligne mais laisse la carte visible. sold_out_today ne compte que si la date est celle du jour.",
+    "paused": false,
+    "paused_message": { "pt": "", "en": "", "fr": "" },
+    "prep_minutes": 15,
+    "rush": [
+      { "days": ["sat"], "from": "09:00", "to": "11:30", "prep_minutes": 25 }
+    ],
+    "slot_step_minutes": 15,
+    "last_order_minutes_before_close": 10,
+    "first_slot_minutes_after_open": 15,
+    "preorder_before_open_minutes": 1440,
+    "allow_preorder_next_day": true,
+    "max_qty_per_item": 6,
+    "max_items_per_order": 12,
+    "max_lines": 10,
+    "note_max_chars": 120,
+    "reply_expectation_minutes": 10,
+    "sold_out_today": { "date": "", "item_ids": [] }
+  },
+
+
+  "discounts": {
+    "_comment": "Codes de réduction. type = percent (pourcentage) ou amount (montant en euros). value = 10 pour 10 %, ou 1 pour 1,00 €. Facultatifs : min_order (minimum en euros), valid_from et valid_until (dates AAAA-MM-JJ), service (all, takeaway ou salon), max_discount (plafond en euros). active false = code coupé. TESTE10 sert aux essais : SUPPRIME-LE avant d'ouvrir au public.",
+    "codes": [
+      { "code": "TESTE10", "type": "percent", "value": 10, "active": true },
+      { "code": "BEMVINDO", "type": "amount", "value": 1, "min_order": 5, "service": "all", "valid_until": "2026-12-31", "active": false }
+    ]
+  },
+
+  "fallbacks": {
+    "sms_enabled": false
+  },
+
+  "announcement": { "pt": "", "en": "", "fr": "" },
+
+  "languages": { "default": "pt", "fallback": "en" },
+
+  "timezone": "Europe/Lisbon",
+  "debug": false
+}

@@ -1,0 +1,33 @@
+{
+  "name": "BIKA — Serviço ao salão",
+  "short_name": "BIKA Salão",
+  "description": "Café e croissants no teu lugar. Pede daqui, a BIKA leva ao salão.",
+  "id": "./salao",
+  "start_url": "./salao?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EDE6DA",
+  "theme_color": "#EDE6DA",
+  "lang": "pt-PT",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

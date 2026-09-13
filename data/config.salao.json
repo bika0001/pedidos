@@ -1,0 +1,17 @@
+{
+  "_comment": "Réglages de la version SALON DE COIFFURE (salao.html). Ce fichier ne contient QUE les différences avec config.json : horaires, numéro WhatsApp, paiement et plafonds sont repris automatiquement. La carte est la même : data/menu.json.",
+
+  "salon": {
+    "_comment": "Nom du salon voisin. Sert de repère pour toi, le client n'a rien d'autre à remplir que son prénom.",
+    "name": "o salão ao lado"
+  },
+
+  "ordering": {
+    "_comment": "Le salon est à côté : on compte le temps de préparation plus la traversée. Créneaux de 10 min parce que le client est assis et attend.",
+    "prep_minutes": 12,
+    "slot_step_minutes": 10,
+    "preorder_before_open_minutes": 0,
+    "_comment_nuit": "Au salon, le client est assis sur place : pas de commande pour le lendemain.",
+    "allow_preorder_next_day": false
+  }
+}

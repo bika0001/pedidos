@@ -1,0 +1,1792 @@
+{
+  "version": "2026-09-13.1",
+  "currency": "EUR",
+  "allergens": {
+    "1": {
+      "pt": "Glúten",
+      "en": "Gluten",
+      "fr": "Gluten"
+    },
+    "3": {
+      "pt": "Ovos",
+      "en": "Eggs",
+      "fr": "Œufs"
+    },
+    "4": {
+      "pt": "Peixe",
+      "en": "Fish",
+      "fr": "Poisson"
+    },
+    "6": {
+      "pt": "Soja",
+      "en": "Soy",
+      "fr": "Soja"
+    },
+    "7": {
+      "pt": "Leite",
+      "en": "Milk",
+      "fr": "Lait"
+    },
+    "8": {
+      "pt": "Frutos de casca rija",
+      "en": "Tree nuts",
+      "fr": "Fruits à coque"
+    },
+    "10": {
+      "pt": "Mostarda",
+      "en": "Mustard",
+      "fr": "Moutarde"
+    }
+  },
+  "modifiers": {
+    "plant_milk": {
+      "name": {
+        "pt": "Bebida vegetal",
+        "en": "Plant-based milk",
+        "fr": "Lait végétal"
+      },
+      "price": 0.5
+    },
+    "extra": {
+      "name": {
+        "pt": "Extra",
+        "en": "Extra",
+        "fr": "Extra"
+      },
+      "price": 0.5
+    },
+    "extra_shot": {
+      "name": {
+        "pt": "Shot extra de espresso",
+        "en": "Extra shot espresso",
+        "fr": "Shot d’espresso en plus"
+      },
+      "price": 1
+    },
+    "topping_oreo": {
+      "name": {
+        "pt": "Cobertura Oreo",
+        "en": "Oreo topping",
+        "fr": "Topping Oreo"
+      },
+      "price": 1,
+      "allergens": [
+        1,
+        6
+      ]
+    },
+    "topping_speculoos": {
+      "name": {
+        "pt": "Cobertura Speculoos",
+        "en": "Speculoos topping",
+        "fr": "Topping spéculoos"
+      },
+      "price": 1,
+      "allergens": [
+        1,
+        6
+      ]
+    },
+    "topping_cookie": {
+      "name": {
+        "pt": "Cobertura Bolacha",
+        "en": "Cookie topping",
+        "fr": "Topping cookie"
+      },
+      "price": 1,
+      "allergens": [
+        1,
+        3,
+        7
+      ]
+    },
+    "sweet_potato": {
+      "name": {
+        "pt": "Trocar por chips de batata-doce",
+        "en": "Swap for sweet potato chips",
+        "fr": "Chips de patate douce à la place"
+      },
+      "price": 1
+    }
+  },
+  "footnote": {
+    "pt": "O melhor não está neste menu. Está na vitrine. Croissants, pastéis de nata, brownies, cookies, bolos do dia — espreita lá dentro.",
+    "en": "The best isn’t on this menu. It’s in the display. Croissants, pastéis de nata, brownies, cookies, cakes of the day — come inside and take a look.",
+    "fr": "Le meilleur n’est pas sur cette carte. Il est en vitrine. Croissants, pastéis de nata, brownies, cookies, gâteaux du jour — entre jeter un œil."
+  },
+  "categories": [
+    {
+      "id": "classicos",
+      "station": "bar",
+      "name": {
+        "pt": "Clássicos",
+        "en": "Classics",
+        "fr": "Classiques"
+      },
+      "tagline": {
+        "pt": "Bebida vegetal ou extras +0,50 €",
+        "en": "Plant-based milk or extras +0,50 €",
+        "fr": "Lait végétal ou extras +0,50 €"
+      },
+      "items": [
+        {
+          "id": "espresso",
+          "name": {
+            "pt": "Espresso",
+            "en": "Espresso",
+            "fr": "Espresso"
+          },
+          "desc": {
+            "pt": "Café de especialidade",
+            "en": "Specialty coffee",
+            "fr": "Café de spécialité"
+          },
+          "price": 1.5,
+          "allergens": []
+        },
+        {
+          "id": "espresso_duplo",
+          "name": {
+            "pt": "Espresso duplo",
+            "en": "Double espresso",
+            "fr": "Double espresso"
+          },
+          "price": 2,
+          "allergens": []
+        },
+        {
+          "id": "americano",
+          "name": {
+            "pt": "Americano",
+            "en": "Americano",
+            "fr": "Americano"
+          },
+          "price": 2.5,
+          "allergens": []
+        },
+        {
+          "id": "americano_laranja",
+          "name": {
+            "pt": "Americano Laranja",
+            "en": "Orange Americano",
+            "fr": "Americano à l’orange"
+          },
+          "price": 3.9,
+          "allergens": [],
+          "tags": [
+            "new"
+          ]
+        },
+        {
+          "id": "cappuccino",
+          "name": {
+            "pt": "Cappuccino",
+            "en": "Cappuccino",
+            "fr": "Cappuccino"
+          },
+          "price": 3.9,
+          "allergens": [
+            7
+          ],
+          "modifiers": [
+            "plant_milk",
+            "extra"
+          ]
+        },
+        {
+          "id": "latte_macchiato",
+          "name": {
+            "pt": "Latte Macchiato",
+            "en": "Latte Macchiato",
+            "fr": "Latte Macchiato"
+          },
+          "price": 3.7,
+          "allergens": [
+            7
+          ],
+          "modifiers": [
+            "plant_milk",
+            "extra"
+          ]
+        },
+        {
+          "id": "cha",
+          "name": {
+            "pt": "Chá",
+            "en": "Tea",
+            "fr": "Thé"
+          },
+          "price": 2.9,
+          "allergens": []
+        },
+        {
+          "id": "leite_quente",
+          "name": {
+            "pt": "Leite quente",
+            "en": "Hot milk",
+            "fr": "Lait chaud"
+          },
+          "price": 2,
+          "allergens": [
+            7
+          ],
+          "modifiers": [
+            "plant_milk"
+          ]
+        },
+        {
+          "id": "chocolate_quente",
+          "name": {
+            "pt": "Chocolate quente",
+            "en": "Hot chocolate",
+            "fr": "Chocolat chaud"
+          },
+          "price": 3.5,
+          "allergens": [
+            7
+          ],
+          "modifiers": [
+            "plant_milk"
+          ]
+        },
+        {
+          "id": "affogato",
+          "name": {
+            "pt": "Affogato",
+            "en": "Affogato",
+            "fr": "Affogato"
+          },
+          "desc": {
+            "pt": "Gelado italiano, espresso duplo por cima",
+            "en": "Italian gelato, double espresso poured over",
+            "fr": "Gelato italien, double espresso versé dessus"
+          },
+          "price": 3.9,
+          "allergens": [
+            7
+          ],
+          "tags": [
+            "new"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "matcha",
+      "station": "bar",
+      "name": {
+        "pt": "Matcha Bar",
+        "en": "Matcha Bar",
+        "fr": "Matcha Bar"
+      },
+      "tagline": {
+        "pt": "Quente ou gelado · Bebida vegetal +0,50 €",
+        "en": "Hot or iced · Plant-based milk +0,50 €",
+        "fr": "Chaud ou glacé · Lait végétal +0,50 €"
+      },
+      "items": [
+        {
+          "id": "matcha_classic",
+          "name": {
+            "pt": "Matcha Clássico",
+            "en": "Matcha Classic",
+            "fr": "Matcha Classique"
+          },
+          "price": 3.9,
+          "allergens": [],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "matcha_latte",
+          "name": {
+            "pt": "Matcha Latte",
+            "en": "Matcha Latte",
+            "fr": "Matcha Latte"
+          },
+          "price": 4.5,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk"
+          ]
+        },
+        {
+          "id": "matcha_latte_baunilha",
+          "name": {
+            "pt": "Matcha Latte Baunilha",
+            "en": "Matcha Latte Vanilla",
+            "fr": "Matcha Latte Vanille"
+          },
+          "price": 4.9,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk"
+          ]
+        },
+        {
+          "id": "matcha_latte_salted_caramel",
+          "name": {
+            "pt": "Matcha Latte Caramelo Salgado",
+            "en": "Matcha Latte Salted Caramel",
+            "fr": "Matcha Latte Caramel salé"
+          },
+          "price": 4.9,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk"
+          ]
+        },
+        {
+          "id": "matcha_latte_mango",
+          "name": {
+            "pt": "Matcha Latte Manga",
+            "en": "Matcha Latte Mango",
+            "fr": "Matcha Latte Mangue"
+          },
+          "price": 4.9,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk"
+          ]
+        },
+        {
+          "id": "matcha_latte_banana",
+          "name": {
+            "pt": "Matcha Latte Banana",
+            "en": "Matcha Latte Banana",
+            "fr": "Matcha Latte Banane"
+          },
+          "price": 4.9,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk"
+          ],
+          "tags": [
+            "new"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "latte_bar",
+      "station": "bar",
+      "name": {
+        "pt": "Latte Bar",
+        "en": "Latte Bar",
+        "fr": "Latte Bar"
+      },
+      "tagline": {
+        "pt": "Quente ou gelado · Bebida vegetal +0,50 € · Shot extra de espresso +1,00 €",
+        "en": "Hot or iced · Plant-based milk +0,50 € · Extra shot espresso +1,00 €",
+        "fr": "Chaud ou glacé · Lait végétal +0,50 € · Shot d’espresso en plus +1,00 €"
+      },
+      "items": [
+        {
+          "id": "latte_classic",
+          "name": {
+            "pt": "Latte Clássico",
+            "en": "Latte Classic",
+            "fr": "Latte Classique"
+          },
+          "price": 3.5,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ]
+        },
+        {
+          "id": "latte_french_vanilla",
+          "name": {
+            "pt": "Latte Baunilha Francesa",
+            "en": "Latte French Vanilla",
+            "fr": "Latte Vanille française"
+          },
+          "price": 4.5,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ]
+        },
+        {
+          "id": "latte_salted_caramel",
+          "name": {
+            "pt": "Latte Caramelo Salgado",
+            "en": "Latte Salted Caramel",
+            "fr": "Latte Caramel salé"
+          },
+          "price": 4.5,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ]
+        },
+        {
+          "id": "latte_biscoff",
+          "name": {
+            "pt": "Latte Biscoff",
+            "en": "Latte Biscoff",
+            "fr": "Latte Biscoff"
+          },
+          "price": 4.9,
+          "allergens": [
+            1,
+            6,
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ],
+          "tags": [
+            "new"
+          ]
+        },
+        {
+          "id": "latte_oreo",
+          "name": {
+            "pt": "Latte Oreo",
+            "en": "Latte Oreo",
+            "fr": "Latte Oreo"
+          },
+          "price": 4.9,
+          "allergens": [
+            1,
+            6,
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ],
+          "tags": [
+            "new"
+          ]
+        },
+        {
+          "id": "latte_roasted_hazelnut",
+          "name": {
+            "pt": "Latte Avelã Torrada",
+            "en": "Latte Roasted Hazelnut",
+            "fr": "Latte Noisette torréfiée"
+          },
+          "price": 4.5,
+          "allergens": [
+            7,
+            8
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ],
+          "tags": [
+            "new"
+          ]
+        },
+        {
+          "id": "latte_cinnamon_roll",
+          "name": {
+            "pt": "Latte Rolo de Canela",
+            "en": "Latte Cinnamon Roll",
+            "fr": "Latte Cinnamon Roll"
+          },
+          "price": 4.9,
+          "allergens": [
+            1,
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ],
+          "tags": [
+            "new"
+          ]
+        },
+        {
+          "id": "latte_creme_brulee",
+          "name": {
+            "pt": "Latte Crème Brûlée",
+            "en": "Latte Crème Brûlée",
+            "fr": "Latte Crème brûlée"
+          },
+          "price": 4.9,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ],
+          "tags": [
+            "new"
+          ]
+        },
+        {
+          "id": "latte_pumpkin_spice",
+          "name": {
+            "pt": "Latte Abóbora",
+            "en": "Latte Pumpkin Spice",
+            "fr": "Latte Pumpkin Spice"
+          },
+          "price": 4.9,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ],
+          "tags": [
+            "new"
+          ]
+        },
+        {
+          "id": "latte_banana",
+          "name": {
+            "pt": "Latte Banana",
+            "en": "Latte Banana",
+            "fr": "Latte Banane"
+          },
+          "price": 4.9,
+          "allergens": [
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Quente ou gelado?",
+              "en": "Hot or iced?",
+              "fr": "Chaud ou glacé ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "quente",
+                "name": {
+                  "pt": "Quente",
+                  "en": "Hot",
+                  "fr": "Chaud"
+                },
+                "price": 0
+              },
+              {
+                "id": "iced",
+                "name": {
+                  "pt": "Gelado",
+                  "en": "Iced",
+                  "fr": "Glacé"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "plant_milk",
+            "extra_shot"
+          ],
+          "tags": [
+            "new"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frio",
+      "station": "bar",
+      "name": {
+        "pt": "Frio",
+        "en": "Cold & Juice",
+        "fr": "Frais & jus"
+      },
+      "tagline": {
+        "pt": "Bebidas frias e sumos",
+        "en": "Cold drinks and juice",
+        "fr": "Boissons fraîches et jus"
+      },
+      "items": [
+        {
+          "id": "soft",
+          "name": {
+            "pt": "Soft",
+            "en": "Soft",
+            "fr": "Soft"
+          },
+          "desc": {
+            "pt": "Coca-Cola, Coca-Cola Zero, 7UP, Pedras, Compal (maçã · pêssego)",
+            "en": "Coca-Cola, Coca-Cola Zero, 7UP, Pedras, Compal (apple · peach)",
+            "fr": "Coca-Cola, Coca-Cola Zero, 7UP, Pedras, Compal (pomme · pêche)"
+          },
+          "price": 2.5,
+          "allergens": [],
+          "choice": {
+            "name": {
+              "pt": "Qual?",
+              "en": "Which one?",
+              "fr": "Lequel ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "coca_cola",
+                "name": {
+                  "pt": "Coca-Cola",
+                  "en": "Coca-Cola",
+                  "fr": "Coca-Cola"
+                },
+                "price": 0
+              },
+              {
+                "id": "coca_cola_zero",
+                "name": {
+                  "pt": "Coca-Cola Zero",
+                  "en": "Coca-Cola Zero",
+                  "fr": "Coca-Cola Zero"
+                },
+                "price": 0
+              },
+              {
+                "id": "7up",
+                "name": {
+                  "pt": "7UP",
+                  "en": "7UP",
+                  "fr": "7UP"
+                },
+                "price": 0
+              },
+              {
+                "id": "pedras",
+                "name": {
+                  "pt": "Pedras",
+                  "en": "Pedras sparkling water",
+                  "fr": "Pedras (eau gazeuse)"
+                },
+                "price": 0
+              },
+              {
+                "id": "compal_maca",
+                "name": {
+                  "pt": "Compal maçã",
+                  "en": "Compal apple",
+                  "fr": "Compal pomme"
+                },
+                "price": 0
+              },
+              {
+                "id": "compal_pessego",
+                "name": {
+                  "pt": "Compal pêssego",
+                  "en": "Compal peach",
+                  "fr": "Compal pêche"
+                },
+                "price": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "refresco_da_casa",
+          "name": {
+            "pt": "Refresco da casa",
+            "en": "House Iced Tea",
+            "fr": "Thé glacé maison"
+          },
+          "price": 3.5,
+          "allergens": []
+        },
+        {
+          "id": "sumo_de_laranja",
+          "name": {
+            "pt": "Sumo de laranja do Algarve",
+            "en": "Algarve Orange Juice",
+            "fr": "Jus d’orange de l’Algarve"
+          },
+          "desc": {
+            "pt": "Espremido na hora",
+            "en": "Fresh Algarvian orange juice, squeezed to order",
+            "fr": "Jus d’orange frais de l’Algarve, pressé minute"
+          },
+          "price": 3.9,
+          "allergens": []
+        },
+        {
+          "id": "kombucha",
+          "name": {
+            "pt": "Kombucha",
+            "en": "Kombucha",
+            "fr": "Kombucha"
+          },
+          "desc": {
+            "pt": "Romã · Limão & gengibre",
+            "en": "Pomegranate · Lemon & ginger",
+            "fr": "Grenade · Citron & gingembre"
+          },
+          "price": 4,
+          "allergens": [],
+          "choice": {
+            "name": {
+              "pt": "Qual?",
+              "en": "Which one?",
+              "fr": "Lequel ?"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "roma",
+                "name": {
+                  "pt": "Romã",
+                  "en": "Pomegranate",
+                  "fr": "Grenade"
+                },
+                "price": 0
+              },
+              {
+                "id": "limao_gengibre",
+                "name": {
+                  "pt": "Limão & gengibre",
+                  "en": "Lemon & ginger",
+                  "fr": "Citron & gingembre"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "tags": [
+            "new"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "croissants",
+      "station": "kitchen",
+      "name": {
+        "pt": "Croissant Club",
+        "en": "Croissant Club",
+        "fr": "Croissant Club"
+      },
+      "tagline": {
+        "pt": "Sandes de croissant · Com chips premium de batata · Batata-doce +1,00 €",
+        "en": "With premium potato chips · Sweet potato +1,00 €",
+        "fr": "Sandwichs croissant · Avec chips de pomme de terre premium · Patate douce +1,00 €"
+      },
+      "items": [
+        {
+          "id": "croissant_classique",
+          "name": {
+            "pt": "Clássico",
+            "en": "Classic",
+            "fr": "Classique"
+          },
+          "desc": {
+            "pt": "Fiambre superior, queijo flamengo, manteiga salgada",
+            "en": "Premium ham, Flamengo cheese, salted butter",
+            "fr": "Jambon supérieur, fromage flamengo, beurre salé"
+          },
+          "price": 5,
+          "allergens": [
+            1,
+            3,
+            7
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "cold"
+          ]
+        },
+        {
+          "id": "frenchie",
+          "name": {
+            "pt": "Frenchie",
+            "en": "Frenchie",
+            "fr": "Frenchie"
+          },
+          "desc": {
+            "pt": "Brie, fiambre superior, manteiga salgada",
+            "en": "Brie, premium ham, salted butter",
+            "fr": "Brie, jambon supérieur, beurre salé"
+          },
+          "price": 6.9,
+          "allergens": [
+            1,
+            3,
+            7
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "cold"
+          ]
+        },
+        {
+          "id": "new_york_deli",
+          "name": {
+            "pt": "New York Deli",
+            "en": "New York Deli",
+            "fr": "New York Deli"
+          },
+          "desc": {
+            "pt": "Pastrami à Nova Iorque, pickles, mostarda e mel",
+            "en": "New York style pastrami, pickles and honey mustard",
+            "fr": "Pastrami à la new-yorkaise, pickles et moutarde au miel"
+          },
+          "price": 9.9,
+          "allergens": [
+            1,
+            3,
+            7,
+            10
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "hot"
+          ]
+        },
+        {
+          "id": "portuguesa",
+          "name": {
+            "pt": "Portuguesa",
+            "en": "Portuguesa",
+            "fr": "Portuguesa"
+          },
+          "desc": {
+            "pt": "Presunto maturado, queijo português",
+            "en": "Cured presunto, Portuguese cheese",
+            "fr": "Presunto affiné, fromage portugais"
+          },
+          "price": 6.9,
+          "allergens": [
+            1,
+            3,
+            7
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "cold"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "melts",
+      "station": "kitchen",
+      "tags": [
+        "new"
+      ],
+      "name": {
+        "pt": "Melts & Sandes",
+        "en": "Melts & Sandwiches",
+        "fr": "Melts & Sandwichs"
+      },
+      "tagline": {
+        "pt": "Na baguete rústica artesanal, com chips premium · Batata-doce +1,00 €",
+        "en": "On artisan rustic baguette, with premium chips · Sweet potato +1,00 €",
+        "fr": "Sur baguette rustique artisanale, avec chips premium · Patate douce +1,00 €"
+      },
+      "items": [
+        {
+          "id": "frango_crocante",
+          "name": {
+            "pt": "Frango Crocante",
+            "en": "Crispy Chicken",
+            "fr": "Poulet croustillant"
+          },
+          "desc": {
+            "pt": "Frango panado, cheddar, mix de salada, molho secreto",
+            "en": "Crispy chicken, cheddar, salad mix, secret sauce",
+            "fr": "Poulet pané, cheddar, mélange de salades, sauce secrète"
+          },
+          "price": 7.5,
+          "allergens": [
+            1,
+            3,
+            7,
+            10
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "hot"
+          ]
+        },
+        {
+          "id": "golden_goat",
+          "name": {
+            "pt": "Golden Goat",
+            "en": "Golden Goat",
+            "fr": "Golden Goat"
+          },
+          "desc": {
+            "pt": "Queijo de cabra, mel, presunto, mix de salada",
+            "en": "Goat cheese, honey, presunto, salad mix",
+            "fr": "Fromage de chèvre, miel, presunto, mélange de salades"
+          },
+          "price": 7.9,
+          "allergens": [
+            1,
+            7
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "hot"
+          ]
+        },
+        {
+          "id": "toastie_cheese_ham",
+          "name": {
+            "pt": "Queijo e Fiambre",
+            "en": "Cheese & Ham",
+            "fr": "Fromage & jambon"
+          },
+          "desc": {
+            "pt": "Queijo fundente, fiambre, molho secreto",
+            "en": "Melty cheese, ham, secret sauce",
+            "fr": "Fromage fondant, jambon, sauce secrète"
+          },
+          "price": 6.5,
+          "allergens": [
+            1,
+            3,
+            7,
+            10
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "hot"
+          ]
+        },
+        {
+          "id": "toastie_veggie",
+          "name": {
+            "pt": "Veggie Queijo e Tomate",
+            "en": "Veggie Cheese & Tomato",
+            "fr": "Veggie fromage & tomate"
+          },
+          "desc": {
+            "pt": "Mix de queijos, tomate semi-seco, azeite de manjericão",
+            "en": "Cheese mix, semi-dried tomato, basil oil",
+            "fr": "Mélange de fromages, tomate mi-séchée, huile au basilic"
+          },
+          "price": 6.9,
+          "allergens": [
+            1,
+            7
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "veggie",
+            "hot"
+          ]
+        },
+        {
+          "id": "the_fjord",
+          "name": {
+            "pt": "The Fjord",
+            "en": "The Fjord",
+            "fr": "The Fjord"
+          },
+          "desc": {
+            "pt": "Salmão, cream cheese, pepino",
+            "en": "Salmon, cream cheese, cucumber",
+            "fr": "Saumon, fromage frais, concombre"
+          },
+          "price": 7.9,
+          "allergens": [
+            1,
+            4,
+            7
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "cold"
+          ]
+        },
+        {
+          "id": "atum_cremoso",
+          "name": {
+            "pt": "Atum Cremoso",
+            "en": "Creamy Tuna",
+            "fr": "Thon crémeux"
+          },
+          "desc": {
+            "pt": "Atum com maionese cremosa, cebola frita, pepino",
+            "en": "Creamy tuna mayo, fried onion, cucumber",
+            "fr": "Thon à la mayonnaise crémeuse, oignon frit, concombre"
+          },
+          "price": 7.5,
+          "allergens": [
+            1,
+            3,
+            4,
+            7
+          ],
+          "modifiers": [
+            "sweet_potato"
+          ],
+          "tags": [
+            "cold"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gelado",
+      "station": "kitchen",
+      "name": {
+        "pt": "Gelado",
+        "en": "Ice Cream",
+        "fr": "Glaces"
+      },
+      "tagline": {
+        "pt": "Cobertura +1,00 € — Oreo · Speculoos · Bolacha",
+        "en": "Topping +1,00 € — Oreo · Speculoos · Cookie",
+        "fr": "Topping +1,00 € — Oreo · spéculoos · cookie"
+      },
+      "items": [
+        {
+          "id": "gelado",
+          "name": {
+            "pt": "Gelado",
+            "en": "Ice cream",
+            "fr": "Glace"
+          },
+          "desc": {
+            "pt": "Tiramisu · Cheesecake · Baunilha",
+            "en": "Tiramisu · Cheesecake · Vanilla",
+            "fr": "Tiramisu · Cheesecake · Vanille"
+          },
+          "price": 2,
+          "allergens": [
+            1,
+            3,
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Sabor",
+              "en": "Flavour",
+              "fr": "Parfum"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "tiramisu",
+                "name": {
+                  "pt": "Tiramisu",
+                  "en": "Tiramisu",
+                  "fr": "Tiramisu"
+                },
+                "price": 0
+              },
+              {
+                "id": "cheesecake",
+                "name": {
+                  "pt": "Cheesecake",
+                  "en": "Cheesecake",
+                  "fr": "Cheesecake"
+                },
+                "price": 0
+              },
+              {
+                "id": "baunilha",
+                "name": {
+                  "pt": "Baunilha",
+                  "en": "Vanilla",
+                  "fr": "Vanille"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "modifiers": [
+            "topping_oreo",
+            "topping_speculoos",
+            "topping_cookie"
+          ]
+        },
+        {
+          "id": "gelato_italiano",
+          "name": {
+            "pt": "Gelado italiano",
+            "en": "Italian gelato",
+            "fr": "Gelato italien"
+          },
+          "price": 2,
+          "allergens": [
+            7
+          ],
+          "modifiers": [
+            "topping_oreo",
+            "topping_speculoos",
+            "topping_cookie"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loaded_chips",
+      "station": "kitchen",
+      "tags": [
+        "new"
+      ],
+      "name": {
+        "pt": "Loaded Chips",
+        "en": "Loaded Chips",
+        "fr": "Loaded Chips"
+      },
+      "items": [
+        {
+          "id": "loaded_chips_classic",
+          "name": {
+            "pt": "Loaded Chips Clássica",
+            "en": "Loaded Chips Classic",
+            "fr": "Loaded Chips Classique"
+          },
+          "desc": {
+            "pt": "Cheddar e bacon",
+            "en": "Cheddar and bacon",
+            "fr": "Cheddar et bacon"
+          },
+          "price": 4.9,
+          "allergens": [
+            7
+          ],
+          "tags": [
+            "hot"
+          ]
+        },
+        {
+          "id": "loaded_chips_ny",
+          "name": {
+            "pt": "Loaded Chips NY",
+            "en": "Loaded Chips NY",
+            "fr": "Loaded Chips NY"
+          },
+          "desc": {
+            "pt": "Pastrami, cheddar, molho secreto",
+            "en": "Pastrami, cheddar, secret sauce",
+            "fr": "Pastrami, cheddar, sauce secrète"
+          },
+          "price": 6.9,
+          "allergens": [
+            3,
+            7,
+            10
+          ],
+          "tags": [
+            "hot"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crolado",
+      "station": "kitchen",
+      "name": {
+        "pt": "Crolado",
+        "en": "Crolado",
+        "fr": "Crolado"
+      },
+      "items": [
+        {
+          "id": "crolado",
+          "name": {
+            "pt": "Crolado",
+            "en": "Crolado",
+            "fr": "Crolado"
+          },
+          "desc": {
+            "pt": "Croissant com gelado no interior.",
+            "en": "Croissant with gelato inside.",
+            "fr": "Croissant fourré au gelato."
+          },
+          "price": 4.9,
+          "allergens": [
+            1,
+            3,
+            7
+          ],
+          "choice": {
+            "name": {
+              "pt": "Sabor",
+              "en": "Flavour",
+              "fr": "Parfum"
+            },
+            "required": true,
+            "options": [
+              {
+                "id": "tiramisu",
+                "name": {
+                  "pt": "Tiramisu",
+                  "en": "Tiramisu",
+                  "fr": "Tiramisu"
+                },
+                "price": 0
+              },
+              {
+                "id": "cheesecake",
+                "name": {
+                  "pt": "Cheesecake",
+                  "en": "Cheesecake",
+                  "fr": "Cheesecake"
+                },
+                "price": 0
+              },
+              {
+                "id": "baunilha",
+                "name": {
+                  "pt": "Baunilha",
+                  "en": "Vanilla",
+                  "fr": "Vanille"
+                },
+                "price": 0
+              }
+            ]
+          },
+          "tags": [
+            "new"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pastelaria",
+      "station": "kitchen",
+      "name": {
+        "pt": "Pastelaria & sobremesas",
+        "en": "Bakery & Desserts",
+        "fr": "Pâtisserie & desserts"
+      },
+      "tagline": {
+        "pt": "Acabados de sair do forno",
+        "en": "Straight out of the oven",
+        "fr": "Tout juste sortis du four"
+      },
+      "items": [
+        {
+          "id": "croissant",
+          "name": {
+            "pt": "Croissant",
+            "en": "Croissant",
+            "fr": "Croissant"
+          },
+          "price": 2,
+          "allergens": [
+            1,
+            3,
+            7
+          ]
+        },
+        {
+          "id": "pastel_de_nata",
+          "name": {
+            "pt": "Pastel de Nata",
+            "en": "Pastel de nata",
+            "fr": "Pastel de nata"
+          },
+          "price": 2,
+          "allergens": [
+            1,
+            3,
+            7
+          ]
+        },
+        {
+          "id": "brownie",
+          "name": {
+            "pt": "Brownie",
+            "en": "Brownie",
+            "fr": "Brownie"
+          },
+          "price": 3,
+          "allergens": [
+            1,
+            3,
+            6,
+            7
+          ]
+        },
+        {
+          "id": "cookie",
+          "name": {
+            "pt": "Cookie",
+            "en": "Cookie",
+            "fr": "Cookie"
+          },
+          "price": 3,
+          "allergens": [
+            1,
+            3,
+            7
+          ]
+        },
+        {
+          "id": "cookie_biscoff",
+          "name": {
+            "pt": "Cookie Biscoff",
+            "en": "Biscoff Cookie",
+            "fr": "Cookie Biscoff"
+          },
+          "price": 3.5,
+          "allergens": [
+            1,
+            3,
+            6,
+            7
+          ]
+        }
+      ]
+    }
+  ]
+}
