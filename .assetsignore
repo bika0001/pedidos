@@ -1,4 +1,4 @@
-# Fichiers du dépôt à ne pas mettre en ligne
+# Fichiers du dépôt à ne pas mettre en ligne (Cloudflare Workers)
 .git
 .github
 README.md
