@@ -1,0 +1,8 @@
+.git
+.github
+README.md
+BALCAO.md
+wrangler.jsonc
+package.json
+package-lock.json
+netlify.toml
