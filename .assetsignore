@@ -1,3 +1,4 @@
+# Fichiers du dépôt à ne pas mettre en ligne
 .git
 .github
 README.md
