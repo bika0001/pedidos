@@ -15,12 +15,12 @@
   "hours": {
     "_comment": "Horaires d'ouverture = heures de retrait. On peut commander 24h/24, mais seulement pour un créneau pendant ces horaires. Un jour fermé s'écrit [].",
     "mon": [["08:00", "15:00"]],
-    "tue": [["08:00", "15:00"]],
-    "wed": [["08:00", "15:00"]],
+    "tue": [],
+    "wed": [],
     "thu": [["08:00", "15:00"]],
     "fri": [["08:00", "15:00"]],
     "sat": [["08:00", "15:00"]],
-    "sun": []
+    "sun": [["08:00", "15:00"]]
   },
 
   "special_hours": {
