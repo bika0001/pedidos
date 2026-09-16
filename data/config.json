@@ -54,7 +54,7 @@
   "discounts": {
     "_comment": "Codes de réduction. type = percent (pourcentage) ou amount (montant en euros). value = 10 pour 10 %, ou 1 pour 1,00 €. Facultatifs : min_order (minimum en euros), valid_from et valid_until (dates AAAA-MM-JJ), service (all, takeaway ou salon), max_discount (plafond en euros). active false = code coupé. TESTE10 sert aux essais : SUPPRIME-LE avant d'ouvrir au public.",
     "codes": [
-      { "code": "TESTE10", "type": "percent", "value": 10, "active": true },
+      { "code": "HAIRRITUAL10", "type": "percent", "value": 10, "active": true },
       { "code": "BEMVINDO", "type": "amount", "value": 1, "min_order": 5, "service": "all", "valid_until": "2026-12-31", "active": false }
     ]
   },
